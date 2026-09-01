@@ -9,7 +9,7 @@ Pre-registered independent baseline audit and mathematical reproduction of Googl
 
 ## 1. Central Claim Under Audit
 
-Google Quantum AI published a distance-7 logical error rate per cycle $\varepsilon_7 = (1.71 \pm 0.03) \times 10^{-3}$ and an error suppression factor $\Lambda = 2.04 \pm 0.02$ for its ensembled matching synthesis decoder (**Libra**, ensemble size 51) on the Willow 105-qubit processor. The Zenodo public repository ships raw detection events and decoder prediction files for this matching family. 
+Google Quantum AI published a distance-7 logical error rate per cycle `eps_7 = (1.71 +/- 0.03) x 10^-3` and an error suppression factor `Lambda = 2.04 +/- 0.02` for its ensembled matching synthesis decoder (**Libra**, ensemble size 51) on the Willow 105-qubit processor. The Zenodo public repository ships raw detection events and decoder prediction files for this matching family. 
 
 **This audit evaluates whether Google's published matching-family figures recompute directly from the shipped physical prediction files under decision rules frozen before the telemetry data was accessed.**
 
@@ -19,9 +19,9 @@ Google Quantum AI published a distance-7 logical error rate per cycle $\varepsil
 
 Evaluation criteria were pre-registered and cryptographically locked prior to data extraction in [`PREREGISTRATION.md`](PREREGISTRATION.md) (Commit [`bf7e3a7`](https://github.com/VolMax-Studio/willow-decoder-audit-s1/commit/bf7e3a7)):
 
-* **Target A1 (Distance-7 Logical Error $\varepsilon_7$):** Recomputed 1-$\sigma$ regression confidence interval $I_{\text{recomp}}$ fails to overlap published interval $[1.68 \times 10^{-3}, 1.74 \times 10^{-3}] \implies$ **`E3: NOT_VERIFIED`**.
-* **Target A2 (Error Suppression Factor $\Lambda$):** Recomputed 1-$\sigma$ regression confidence interval fails to overlap published scaling $[2.02, 2.06] \implies$ **`L3: NOT_VERIFIED`**.
-* **Target B (Neural Network Headline Figure):** Published figure $\varepsilon_7 = (1.43 \pm 0.03) \times 10^{-3}, \Lambda = 2.14 \pm 0.02$ evaluated against artifact availability in the public archive $\implies$ **`B1: NOT_REPRODUCIBLE_FROM_PUBLIC_DATA`** if model weights/predictions are omitted from public release.
+* **Target A1 (Distance-7 Logical Error `eps_7`):** Recomputed 1-sigma regression confidence interval fails to overlap published interval `[1.68e-3, 1.74e-3]` => **`E3: NOT_VERIFIED`**.
+* **Target A2 (Error Suppression Factor `Lambda`):** Recomputed 1-sigma regression confidence interval fails to overlap published scaling `[2.02, 2.06]` => **`L3: NOT_VERIFIED`**.
+* **Target B (Neural Network Headline Figure):** Published figure `eps_7 = (1.43 +/- 0.03) x 10^-3`, `Lambda = 2.14 +/- 0.02` evaluated against artifact availability in the public archive => **`B1: NOT_REPRODUCIBLE_FROM_PUBLIC_DATA`** if model weights/predictions are omitted from public release.
 
 ---
 
