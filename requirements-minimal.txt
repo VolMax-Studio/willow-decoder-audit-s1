@@ -1,0 +1,4 @@
+stim==1.16.0
+sinter==1.16.0
+PyMatching==2.4.0
+numpy==2.5.2
