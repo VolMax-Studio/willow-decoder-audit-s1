@@ -5,6 +5,7 @@
 **Persistent Identifier (DOI):** [`10.5281/zenodo.13273331`](https://doi.org/10.5281/zenodo.13273331)  
 **Target Archive:** `google_105Q_surface_code_d3_d5_d7.zip` (MD5: `21fa6ad35b395d838ebcdbc92e364a12`)  
 **Pinned Primary Publication:** Google Quantum AI and Collaborators, *Quantum error correction below the surface code threshold*, Preprint: [arXiv:2408.13687v1](https://arxiv.org/abs/2408.13687) (Extracted in `docs/arxiv_source/`). Journal Version: Nature 638, 920–926 (2025), DOI: [`10.1038/s41586-024-08449-y`](https://doi.org/10.1038/s41586-024-08449-y).  
+**Author Correction:** *Author Correction: Quantum error correction below the surface code threshold*, Nature 653, E5 (2026), DOI: [`10.1038/s41586-026-10559-8`](https://doi.org/10.1038/s41586-026-10559-8), published 28 April 2026. Checked 2026-09-01: affects Fig. 3a axis and key labels (repetition code) only. Does not affect Table S1, $\varepsilon_d$, or $\Lambda$.  
 **Date Frozen:** 2026-09-01  
 
 ---
