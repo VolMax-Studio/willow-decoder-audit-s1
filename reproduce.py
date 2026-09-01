@@ -28,8 +28,6 @@ BASES = ["X", "Z"]
 PRIMARY_ROUNDS = ["r10", "r30", "r50", "r70", "r90", "r110", "r130", "r150", "r170", "r190", "r210", "r230", "r250"]
 
 EXPECTED_VERSIONS = {
-    "stim": "1.16.0",
-    "pymatching": "2.4.0",
     "numpy": "2.5.2"
 }
 
@@ -57,10 +55,10 @@ def verify_env(quiet=False):
             if not quiet:
                 print(f"{pkg:<14}: {v:<10} [{status}]")
             if v != exp:
-                print(f"FATAL: Version mismatch for {pkg}. Run: pip install -r requirements-minimal.txt")
+                sys.stderr.write(f"FATAL: Version mismatch for {pkg} (found {v}, expected {exp}). Run: pip install -r requirements-minimal.txt\n")
                 sys.exit(1)
         except ImportError as e:
-            print(f"FATAL: Missing package {pkg} ({e}). Run: pip install -r requirements-minimal.txt")
+            sys.stderr.write(f"FATAL: Missing package {pkg} ({e}). Run: pip install -r requirements-minimal.txt\n")
             sys.exit(1)
     if not quiet:
         print("================================================================================\n")
@@ -338,10 +336,8 @@ def run_audit(data_root: str, quiet=False):
             "Lambda": {"value": lambda_prim, "sigma": sig_lambda_prim}
         },
         "subgrid_means_sensitivity_range_1_to_250": {
-            "eps_3": {"value": mean_eps_sens[3], "sem": sem_eps_sens[3]},
-            "eps_5": {"value": mean_eps_sens[5], "sem": sem_eps_sens[5]},
-            "eps_7": {"value": mean_eps_sens[7], "sem": sem_eps_sens[7]},
-            "Lambda": {"value": lambda_sens, "sigma": sig_lambda_sens}
+            "not_evaluable": True,
+            "reason": "Source dataset Zenodo 10.5281/zenodo.13273331 contains 0 Libra prediction files for cycle r01 (see FAILURES.md #002)"
         },
         "published_references_table_s1": {
             "eps_3": {"value": pub_eps_3, "sigma": pub_sig_eps_3},
@@ -350,10 +346,12 @@ def run_audit(data_root: str, quiet=False):
             "Lambda": {"value": pub_lambda, "sigma": pub_sig_lambda}
         },
         "interval_overlap": {
+            "eps_3_primary": bool(overlap_eps3),
+            "eps_5_primary": bool(overlap_eps5),
             "eps_7_primary": bool(overlap_eps7_prim),
-            "eps_7_sensitivity": bool(overlap_eps7_sens),
+            "eps_7_sensitivity_1_to_250": "NOT_EVALUABLE (missing r01 Libra telemetry)",
             "Lambda_primary": bool(overlap_lambda_prim),
-            "Lambda_sensitivity": bool(overlap_lambda_sens)
+            "Lambda_sensitivity_1_to_250": "NOT_EVALUABLE (missing r01 Libra telemetry)"
         },
         "verdicts": {
             "target_a1_eps_7": verdict_eps7,

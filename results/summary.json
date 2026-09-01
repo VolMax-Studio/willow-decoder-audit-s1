@@ -230,9 +230,11 @@
   ],
   "interval_overlap": {
     "Lambda_primary": true,
-    "Lambda_sensitivity": true,
+    "Lambda_sensitivity_1_to_250": "NOT_EVALUABLE (missing r01 Libra telemetry)",
+    "eps_3_primary": true,
+    "eps_5_primary": true,
     "eps_7_primary": true,
-    "eps_7_sensitivity": true
+    "eps_7_sensitivity_1_to_250": "NOT_EVALUABLE (missing r01 Libra telemetry)"
   },
   "published_references_table_s1": {
     "Lambda": {
@@ -271,22 +273,8 @@
     }
   },
   "subgrid_means_sensitivity_range_1_to_250": {
-    "Lambda": {
-      "sigma": 0.003201160585861218,
-      "value": 2.038282091967165
-    },
-    "eps_3": {
-      "sem": 1.0966148657202321e-05,
-      "value": 0.007116223473678577
-    },
-    "eps_5": {
-      "sem": 5.593546718422772e-06,
-      "value": 0.0034942598762164323
-    },
-    "eps_7": {
-      "sem": 5.4496566099452576e-06,
-      "value": 0.0017113465352358304
-    }
+    "not_evaluable": true,
+    "reason": "Source dataset Zenodo 10.5281/zenodo.13273331 contains 0 Libra prediction files for cycle r01 (see FAILURES.md #002)"
   },
   "total_experiments_evaluated": 28,
   "total_regressions_executed": 28,
