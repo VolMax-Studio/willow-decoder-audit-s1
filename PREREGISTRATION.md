@@ -94,34 +94,40 @@ B1: NOT_REPRODUCIBLE_FROM_PUBLIC_DATA
 
 ---
 
-## 4. Mathematical Execution Protocol
+## 4. Mathematical Execution Protocol & Statistical Method Declarations
 
 1. **Point Extraction ($p_L$):**
    $$p_L(d, \text{patch}, \text{basis}, t) = \frac{1}{N} \sum_{i=1}^N (\text{obs\_flips\_actual}_i \oplus \text{obs\_flips\_predicted}_i)$$
    with binomial standard error $\sigma_p = \sqrt{p_L(1 - p_L) / N}$.
-2. **Per-Patch Linear Regression:**
-   Fit $y(t) = \ln(1 - 2 p_L(t)) = c + m t$ using weighted linear regression.
+
+2. **Per-Patch Weighted Linear Regression:**
+   Fit $y(t) = \ln(1 - 2 p_L(t)) = c + m t$ using weighted linear regression with weights $w_i = 1 / \sigma_{y, i}^2$, where $\sigma_y = \frac{2 \sigma_p}{1 - 2 p_L}$.
    $$\varepsilon_d(\text{patch}, \text{basis}) = \frac{1 - e^m}{2}$$
    Standard error of regression slope $\sigma_m$ propagates to:
    $$\sigma_{\varepsilon_d} = \frac{e^m}{2} \sigma_m$$
-3. **Subgrid Averaging:**
+
+3. **Subgrid Averaging & T-1 Asymmetry Note:**
    * Mean $\bar{\varepsilon}_d = \frac{1}{2 K_d} \sum_{k=1}^{K_d} (\varepsilon_{d, X, k} + \varepsilon_{d, Z, k})$ across $K_3 = 9, K_5 = 4, K_7 = 1$.
-   * Standard error of the mean: $\sigma_{\bar{\varepsilon}_d} = \frac{1}{2 K_d} \sqrt{\sum \sigma_{\varepsilon}^2}$.
-4. **$\Lambda$ Linear Regression:**
-   Fit $\ln(\bar{\varepsilon}_d) = c_{\Lambda} - \frac{d}{2} \ln(\Lambda)$ across $d \in \{3, 5, 7\}$.
-   $$\Lambda = \exp(-m_{\Lambda}), \quad \sigma_{\Lambda} = \Lambda \cdot \sigma_{m_{\Lambda}}$$
+   * Propagated standard error of the mean: $\sigma_{\bar{\varepsilon}_d} = \frac{1}{2 K_d} \sqrt{\sum \sigma_{\varepsilon}^2}$.
+   * **T-1 Asymmetry Declaration:** Published $\sigma_{\text{pub}}$ for $\varepsilon_7$ ($\pm 0.03 \times 10^{-3}$) is smaller than the empirical $X/Z$ basis spread visible in Table 1 ($1.55$ vs $1.30 \times 10^{-3}$). The precise composition of the published $\sigma_{\text{pub}}$ is not stated in the source. Our $\sigma_{\hat{\varepsilon}}$ is the propagated regression standard error. The two $\sigma$ values are therefore not necessarily identical quantities; interval overlap evaluates agreement within these declared experimental bounds.
+
+4. **$\Lambda$ Weighted Linear Regression & T-2 Degree-of-Freedom Note:**
+   * Fit $\ln(\bar{\varepsilon}_d) = c_{\Lambda} - \frac{d}{2} \ln(\Lambda)$ across $d \in \{3, 5, 7\}$ using weighted linear regression with weights $w_d = 1 / (\sigma_{\bar{\varepsilon}_d} / \bar{\varepsilon}_d)^2$.
+   * $\Lambda = \exp(-m_{\Lambda})$, with $\sigma_{\Lambda} = \Lambda \cdot \sigma_{m_{\Lambda}}$.
+   * **T-2 Degree-of-Freedom Declaration:** Because linear regression across 3 data points ($d=3, 5, 7$) with 2 parameters has 1 degree of freedom ($\text{dof} = 1$), $\sigma_{\Lambda}$ is reported as indicative regression standard error.
 
 ---
 
 ## 5. Provenance, Data Manifest & Determinism Test Protocol
 
 1. **Cryptographic Validation:**
-   * Remote archive MD5 is verified (`21fa6ad35b395d838ebcdbc92e364a12`).
+   * Remote archive MD5 is verified prior to unpacking (`21fa6ad35b395d838ebcdbc92e364a12`).
    * Every extracted `.b8` file is hashed (SHA-256) upon extraction and recorded in `data_manifest.json`.
 2. **Deterministic Regeneration Test:**
-   * Execution must be completely reproducible:
+   * Execution artifacts MUST exclude wall-clock timestamps to guarantee strict byte-determinism.
+   * Full recursive directory diff test:
      ```bash
      mv results results_bak && python3 reproduce.py
-     diff -u results/summary.json results_bak/summary.json
+     diff -r results results_bak
      ```
-   * 0 byte differences required between independent executions.
+   * 0 byte differences required across all JSON, CSV, and summary files in `results/`.
