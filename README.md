@@ -34,10 +34,11 @@ FORMAL VERDICT [TARGET B  - Neural]: B1: NOT_REPRODUCIBLE_FROM_PUBLIC_DATA (Zero
 ## 2. Key Findings
 
 1. **Reproduction Within Published Uncertainty of Google's Libra Matching SOTA:**
-   * Direct re-calculation from 728 physical hardware prediction files (`libra_decoder_with_rl_optimized_prior`) reproduces $\varepsilon_7 = 1.711 \times 10^{-3}$ and $\Lambda = 2.0383$, matching published values ($\varepsilon_7 = 1.71 \pm 0.03 \times 10^{-3}, \Lambda = 2.04 \pm 0.02$) well within 1-$\sigma$ experimental uncertainty.
+   * Direct re-calculation from 728 physical hardware prediction files (`libra_decoder_with_rl_optimized_prior`) across all 14 subgrid patches reproduces $\varepsilon_7 = 1.711 \times 10^{-3}$ and $\Lambda = 2.0383 \pm 0.0032$, matching published values ($\varepsilon_7 = 1.71 \pm 0.03 \times 10^{-3}, \Lambda = 2.04 \pm 0.02$) within 1-$\sigma$ experimental uncertainty.
 2. **Dataset Scope Separation (Neural Network Headline):**
    * The headline metric ($\varepsilon_7 = 1.43 \times 10^{-3}, \Lambda = 2.14$) was produced exclusively by a recurrent attention Neural Network decoder whose model weights and prediction files are omitted from the public Zenodo archive.
-   * Any external claim asserting superiority over "Google's published Willow benchmarks on Zenodo data" is benchmarked against the Matching SOTA ($\varepsilon_7 = 1.71 \times 10^{-3}$), not the headline Neural Network baseline.
+   * The public archive contains prediction files for three matching-family decoders across five prior configurations, but zero predictions from the Neural Network decoder. Any recomputation from this archive alone therefore benchmarks against the matching-family SOTA ($\varepsilon_7 = 1.71 \times 10^{-3}$), not against the headline $1.43 \times 10^{-3}$.
+   * *Note: Neural network model weights are a separate domain artifact and are routinely distributed separately; this is a statement of dataset archive scope, not an allegation regarding the published results.*
 
 ---
 
