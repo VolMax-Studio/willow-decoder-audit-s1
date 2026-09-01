@@ -58,6 +58,13 @@ python3 reproduce.py
 mv results results_bak && python3 reproduce.py && diff -r results results_bak
 ```
 
+### Optional: Publication Figure Generation
+```bash
+pip install -r requirements-figure.txt
+python3 tools/make_figure.py
+```
+Generated figure is saved to [`figures/willow_qec_audit_verification.png`](figures/willow_qec_audit_verification.png).
+
 ---
 
 ## 4. Governance & Specification Artifacts
