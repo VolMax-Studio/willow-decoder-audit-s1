@@ -1,6 +1,6 @@
 # Willow QEC Decoder Audit (willow-decoder-audit-s1)
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13273331.svg)](https://doi.org/10.5281/zenodo.13273331)
+[![Source Dataset DOI](https://img.shields.io/badge/Source%20Dataset%20DOI-10.5281%2Fzenodo.13273331-blue)](https://doi.org/10.5281/zenodo.13273331)
 [![License: CC-BY-4.0](https://img.shields.io/badge/License-CC--BY--4.0-lightgrey.svg)](LICENSE_L0.md)
 
 Pre-registered independent reproduction and baseline audit of Google Quantum AI's Willow processor QEC benchmark numbers (*Nature* 638, 920–926, 2025 / arXiv:2408.13687v1) from raw physical hardware predictions in Zenodo dataset `10.5281/zenodo.13273331`.
@@ -29,7 +29,7 @@ FORMAL VERDICT [TARGET B  - Neural]: B1: NOT_REPRODUCIBLE_FROM_PUBLIC_DATA (Zero
 
 ## 2. Key Findings
 
-1. **Exact Reproduction of Google's Libra Matching SOTA:**
+1. **Reproduction Within Published Uncertainty of Google's Libra Matching SOTA:**
    * Direct re-calculation from 728 physical hardware prediction files (`libra_decoder_with_rl_optimized_prior`) reproduces $\varepsilon_7 = 1.711 \times 10^{-3}$ and $\Lambda = 2.0383$, matching published values ($\varepsilon_7 = 1.71 \pm 0.03 \times 10^{-3}, \Lambda = 2.04 \pm 0.02$) well within 1-$\sigma$ experimental uncertainty.
 2. **Dataset Scope Separation (Neural Network Headline):**
    * The headline metric ($\varepsilon_7 = 1.43 \times 10^{-3}, \Lambda = 2.14$) was produced exclusively by a recurrent attention Neural Network decoder whose model weights and prediction files are omitted from the public Zenodo archive.

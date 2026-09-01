@@ -11,3 +11,14 @@
   2. The ensembled matching baseline $\varepsilon_7 = (1.71 \pm 0.03) \times 10^{-3}, \Lambda = 2.04 \pm 0.02$ was produced by **Libra** (Jones 2024, ensemble size 51).
   3. The public Zenodo dataset (`10.5281/zenodo.13273331`) ships predictions for Libra, Harmony, and Correlated Matching, but **does not ship predictions or weights for the Neural Network decoder**.
 - **Measurable Impact:** Corrected the evaluation target scope before freezing `PREREGISTRATION.md`. The headline neural metric is formally classified as un-evaluable from the public dataset (`R4: Unfalsifiable-as-Stated / Missing Shipped Baseline`), while the matching benchmark ($\varepsilon_7 = 1.71 \times 10^{-3}$) is pre-registered for measurable mathematical verification.
+
+---
+
+### Failure Entry #002 — Inapplicable Sensitivity Rule on r01 Due to Omission in Source Dataset
+- **Date / Event:** 2026-09-01 (Post-Execution Audit Review)
+- **Component:** Decision Rule Premise (`PREREGISTRATION.md v2` Rule E2/L2).
+- **Root Cause (General Class):** Premise Falsification in Shipped Dataset Artifacts. Rules E1/E2 and L1/L2 pre-registered a secondary sensitivity check over cycle range $t \in [1, 250]$ assuming single-cycle ($r01$) predictions for the Libra decoder were present in `google_105Q_surface_code_d3_d5_d7.zip`.
+- **Falsification Evidence:** Complete archive scan of all 5,716,907,033 bytes established that Google shipped exactly 364 Libra prediction files across cycles $r \in [10, 250]$ (`r10`, `r30`, ..., `r250`), with 0 Libra files shipped for $r01$. (Single-cycle predictions were only generated for correlated matching and Harmony).
+- **Measurable Impact:** The sensitivity variation $t \in [1, 250]$ is non-executable on shipped Libra artifacts. Evaluation strictly executes on the primary domain $t \in [10, 250]$ defined in `main.tex:121` and `uncertainty.tex:43`.
+- **Remediation:** Formally logged this premise falsification. The audit verdict rests entirely on the primary domain $t \in [10, 250]$ where all 364 telemetry files exist.
+
