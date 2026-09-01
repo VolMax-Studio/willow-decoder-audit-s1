@@ -17,10 +17,14 @@ d=3 Subgrid Mean (9 patches x 2 bases): eps_3 = 7.116 +/- 0.011 x 10^-3  (Publis
 d=5 Subgrid Mean (4 patches x 2 bases): eps_5 = 3.494 +/- 0.006 x 10^-3  (Published Table S1: 3.49 +/- 0.04 x 10^-3)
 d=7 Center Patch (1 patch   x 2 bases): eps_7 = 1.711 +/- 0.005 x 10^-3  (Published Table S1: 1.71 +/- 0.03 x 10^-3)
 Error Suppression Factor Lambda       : Lambda = 2.0383 +/- 0.0032             (Published Table S1: 2.04 +/- 0.02)
-==================================================================================================================
-
-FORMAL VERDICT [TARGET A1 - eps_7] : E1: VERIFIED
-FORMAL VERDICT [TARGET A2 - Lambda]: L1: VERIFIED
+FORMAL VERDICT [TARGET A1 - eps_7] : E1: VERIFIED (primary range only)
+    Sensitivity condition t in [1,250] could not be evaluated:
+    the archive contains zero Libra prediction files for r01.
+    See FAILURES.md #002.
+FORMAL VERDICT [TARGET A2 - Lambda]: L1: VERIFIED (primary range only)
+    Sensitivity condition t in [1,250] could not be evaluated:
+    the archive contains zero Libra prediction files for r01.
+    See FAILURES.md #002.
 FORMAL VERDICT [TARGET B  - Neural]: B1: NOT_REPRODUCIBLE_FROM_PUBLIC_DATA (Zero prediction files in archive)
 ==================================================================================================================
 ```

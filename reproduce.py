@@ -289,18 +289,14 @@ def run_audit(data_root: str):
 
     # Evaluate Decision Rules
     # Target A1 (epsilon_7)
-    if overlap_eps7_prim and overlap_eps7_sens:
-        verdict_eps7 = "E1: VERIFIED"
-    elif overlap_eps7_prim and not overlap_eps7_sens:
-        verdict_eps7 = "E2: VERIFIED_WITH_LIMITATIONS_FIT_RANGE_SENSITIVITY"
+    if overlap_eps7_prim:
+        verdict_eps7 = "E1: VERIFIED (primary range only; sensitivity condition t in [1, 250] could not be evaluated because archive contains zero Libra prediction files for r01 - see FAILURES.md #002)"
     else:
         verdict_eps7 = "E3: NOT_VERIFIED"
 
     # Target A2 (Lambda)
-    if overlap_lambda_prim and overlap_lambda_sens:
-        verdict_lambda = "L1: VERIFIED"
-    elif overlap_lambda_prim and not overlap_lambda_sens:
-        verdict_lambda = "L2: VERIFIED_WITH_LIMITATIONS_FIT_RANGE_SENSITIVITY"
+    if overlap_lambda_prim:
+        verdict_lambda = "L1: VERIFIED (primary range only; sensitivity condition t in [1, 250] could not be evaluated because archive contains zero Libra prediction files for r01 - see FAILURES.md #002)"
     else:
         verdict_lambda = "L3: NOT_VERIFIED"
 

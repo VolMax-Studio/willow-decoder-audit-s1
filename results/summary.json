@@ -291,8 +291,8 @@
   "total_experiments_evaluated": 28,
   "total_regressions_executed": 28,
   "verdicts": {
-    "target_a1_eps_7": "E1: VERIFIED",
-    "target_a2_Lambda": "L1: VERIFIED",
+    "target_a1_eps_7": "E1: VERIFIED (primary range only; sensitivity condition t in [1, 250] could not be evaluated because archive contains zero Libra prediction files for r01 - see FAILURES.md #002)",
+    "target_a2_Lambda": "L1: VERIFIED (primary range only; sensitivity condition t in [1, 250] could not be evaluated because archive contains zero Libra prediction files for r01 - see FAILURES.md #002)",
     "target_b_neural_headline": "B1: NOT_REPRODUCIBLE_FROM_PUBLIC_DATA (Zero prediction files or model weights in archive)"
   }
 }

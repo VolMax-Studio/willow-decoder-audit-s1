@@ -22,3 +22,14 @@
 - **Measurable Impact:** The sensitivity variation $t \in [1, 250]$ is non-executable on shipped Libra artifacts. Evaluation strictly executes on the primary domain $t \in [10, 250]$ defined in `main.tex:121` and `uncertainty.tex:43`.
 - **Remediation:** Formally logged this premise falsification. The audit verdict rests entirely on the primary domain $t \in [10, 250]$ where all 364 telemetry files exist.
 
+---
+
+### Failure Entry #003 — Non-Canonical Figures in Gate Report
+- **Date / Event:** 2026-09-01 (Gate Review — Result Verification)
+- **Component:** Gate Reporting & Output Pipeline.
+- **Root Cause (General Class):** Non-Canonical Intermediate Text Insertion. The `d=3` per-patch table submitted in the gate report message contained stale values and misplaced patch labels from an earlier exploratory scratch test rather than values emitted directly from `results/summary.json`.
+- **Falsification Evidence:** Detected by the gate through independent recomputation of the arithmetic mean (the report table summed to $7.200 \times 10^{-3}$, whereas the canonical summary file and dataset sum to $7.116 \times 10^{-3}$).
+- **Measurable Impact:** The canonical artifact (`results/summary.json`) was mathematically sound and verified, but the narrative report contained misaligned textual tables.
+- **Remediation & Governance Standard:** Established the mandatory reporting rule: *Every numerical figure in a gate report must be programmatically emitted by a command reading directly from the canonical artifact in the same execution step.*
+
+
