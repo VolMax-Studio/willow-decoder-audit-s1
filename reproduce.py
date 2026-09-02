@@ -104,15 +104,34 @@ def ensure_telemetry(data_root: str, quiet=False):
                     to_extract.append((patch, basis, r, pfx))
 
     missing = []
+    # Verify local files against manifest hashes if available
     for patch, basis, r, pfx in to_extract:
+        key_act = f"{patch}/{basis}/{r}/obs_flips_actual.b8"
+        key_pred = f"{patch}/{basis}/{r}/libra_predicted.b8"
         actual_path = os.path.join(data_root, patch, basis, r, "obs_flips_actual.b8")
         libra_path = os.path.join(data_root, patch, basis, r, "decoding_results/libra_decoder_with_rl_optimized_prior/obs_flips_predicted.b8")
-        if not (os.path.exists(actual_path) and os.path.exists(libra_path)):
+
+        act_ok = os.path.exists(actual_path)
+        pred_ok = os.path.exists(libra_path)
+
+        if act_ok and manifest.get(key_act):
+            with open(actual_path, "rb") as f:
+                h = hashlib.sha256(f.read()).hexdigest()
+            if h != manifest[key_act]:
+                act_ok = False
+
+        if pred_ok and manifest.get(key_pred):
+            with open(libra_path, "rb") as f:
+                h = hashlib.sha256(f.read()).hexdigest()
+            if h != manifest[key_pred]:
+                pred_ok = False
+
+        if not (act_ok and pred_ok):
             missing.append((patch, basis, r, pfx))
 
     if not missing:
         if not quiet:
-            print(f"All 728 telemetry files already verified in local cache ({data_root}).")
+            print(f"All 728 telemetry files verified against data_manifest.json SHA-256 digests ({data_root}).")
         return manifest
 
     if not quiet:
@@ -134,11 +153,25 @@ def ensure_telemetry(data_root: str, quiet=False):
         with open(dest_actual, "wb") as f: f.write(b_actual)
         with open(dest_libra, "wb") as f: f.write(b_libra)
 
-        manifest[f"{patch}/{basis}/{r}/obs_flips_actual.b8"] = hashlib.sha256(b_actual).hexdigest()
-        manifest[f"{patch}/{basis}/{r}/libra_predicted.b8"] = hashlib.sha256(b_libra).hexdigest()
+        h_act = hashlib.sha256(b_actual).hexdigest()
+        h_pred = hashlib.sha256(b_libra).hexdigest()
+
+        key_act = f"{patch}/{basis}/{r}/obs_flips_actual.b8"
+        key_pred = f"{patch}/{basis}/{r}/libra_predicted.b8"
+
+        # If manifest already exists, verify downloaded bytes match pinned manifest
+        if manifest.get(key_act) and h_act != manifest[key_act]:
+            sys.stderr.write(f"FATAL: SHA-256 mismatch for {key_act}\n")
+            sys.exit(1)
+        if manifest.get(key_pred) and h_pred != manifest[key_pred]:
+            sys.stderr.write(f"FATAL: SHA-256 mismatch for {key_pred}\n")
+            sys.exit(1)
+
+        manifest[key_act] = h_act
+        manifest[key_pred] = h_pred
 
         if not quiet:
-            msg = f"[ {idx+1:>3}/{len(missing)} ]  {patch}/{basis}/{r:<4} ................... sha256 ok"
+            msg = f"[ {idx+1:>3}/{len(missing)} ]  {patch}/{basis}/{r:<4} ................... fetched & hashed"
             if sys.stdout.isatty():
                 sys.stdout.write(f"\r{msg}")
                 sys.stdout.flush()
