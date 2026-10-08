@@ -1,0 +1,28 @@
+{
+  "baseline_commit": "4d5b902c4e89eb073c0035f041f1e178b5c79faa",
+  "baseline_tree": "3ff06f8fe1e3d4dcfaa8f86ce09184bda7ddbd75",
+  "behavior": {
+    "callbacks": false,
+    "executable": false,
+    "network_calls": false,
+    "telemetry": false
+  },
+  "canonical_url": "https://github.com/VolMax-Studio/willow-decoder-audit-s1",
+  "default_branch_at_recording": "instances/willow-decoder-audit-s1",
+  "license": {
+    "detected_spdx": "MIT",
+    "files": [
+      "LICENSE",
+      "LICENSE_L0.md"
+    ],
+    "note": "This provenance record does not grant or alter license rights."
+  },
+  "owner": "VolMax-Studio",
+  "record_id": "urn:volmax:github:VolMax-Studio/willow-decoder-audit-s1:4d5b902c4e89eb073c0035f041f1e178b5c79faa",
+  "record_type": "volmax.repository-provenance",
+  "record_version": 1,
+  "recorded_at": "2026-10-08T19:43:59+00:00",
+  "repository": "VolMax-Studio/willow-decoder-audit-s1",
+  "schema": "urn:volmax:provenance:v1",
+  "scope": "Repository identity and baseline commit only; historical tags, releases, evidence, authorship, and existing file bytes are unchanged."
+}
